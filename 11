@@ -1,0 +1,32 @@
+#include <iostream>
+#include <list>
+#include <string>
+using namespace std;
+class Laptop {
+private:
+    string brand;
+    double price;
+public:
+    Laptop(const string& brand, double price) : brand(brand), price(price) {}
+    string GetBrand() const { return brand; }
+    double GetPrice() const { return price; }
+    friend ostream& operator<<(ostream& os, const Laptop& laptop) {
+        os << "Brand: " << laptop.brand << ", Price: $" << laptop.price;
+        return os;
+    }
+};
+int main() {
+    list<Laptop> laptops;
+    laptops.push_front(Laptop("HP", 800));
+    laptops.push_front(Laptop("Dell", 1200));
+    laptops.push_back(Laptop("Lenovo", 700));
+    laptops.push_back(Laptop("Apple", 1500));
+    cout << "Laptops in the list:" << endl;
+    for (const Laptop& laptop : laptops) {
+        cout << laptop.GetBrand() << " - $" << laptop.GetPrice() << endl;
+    }
+    cout << "\nLaptops using operator<<:" << endl;
+    for (const Laptop& laptop : laptops) {
+        cout << laptop << endl;
+    }
+}
